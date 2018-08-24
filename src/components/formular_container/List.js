@@ -2,7 +2,9 @@
 import htmlToElement from 'html-to-element';
 
 export default class List {
-    constructor(){} 
+    constructor(element) {
+        document.querySelector(element).appendChild(this.createList());
+    }
     createList = () => {
         const list = htmlToElement(`
             <div class="accordion accordion--fixed accordion--open" style="overflow: hidden; margin-top: 30px;">
