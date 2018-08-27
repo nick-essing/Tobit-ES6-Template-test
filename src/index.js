@@ -1,9 +1,9 @@
 /* eslint-disable no-console */
-import insert from './components/insert'
+import Insert from './components/insert'
 
 const init = async () => {
     await chayns.ready;
-    insert();
+    new Insert();
 };
 
 init();

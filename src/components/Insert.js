@@ -3,29 +3,20 @@ import tempList1 from './tempList-container/tempList';
 import ListContainer from './formular_container/ListContainer';
 import Searchbar from './formular_container/Searchbar';
 
-export default () => {
-    let tempList = new tempList1();
-    let list = new ListContainer('#list');
-    new Searchbar('#searchbar');
-    /*list.returnEvents().then((data,searchString) => {
-        if (data){
-            tempList.refreshList("https://chayns1.tobit.com/TappApi/Site/SlitteApp?SearchString="+ searchString +"&Skip="+ "0" +"&Take="+ "10");
-        }else{
-            tempList.appendList(SearchString);
-        }
-    }); */
-    new Formular('#formular'); 
-    tempList.refreshList("https://chayns1.tobit.com/TappApi/Site/SlitteApp?SearchString="+ "love" +"&Skip="+ "0" +"&Take="+ "10");
-};
+export default class Insert {
+    
+    constructor() {
+        this.tempList = new tempList1();
+        new ListContainer('#list',this);
+        new Searchbar('#searchbar',this);
+        new Formular('#formular'); 
+        this.tempList.refreshList("https://chayns1.tobit.com/TappApi/Site/SlitteApp?SearchString="+ "love" +"&Skip="+ "0" +"&Take="+ "10");
+    }
 
-/*
-myClass()
-{
-   onChance = ()=>{};
+    onSearchBtnChange = (SearchString) => {
+        this.tempList.refreshList("https://chayns1.tobit.com/TappApi/Site/SlitteApp?SearchString="+ SearchString +"&Skip="+ "0" +"&Take="+ "10");
+    }
+    onMoreBtnChange = (SearchString) => {
+        this.tempList.appendList(SearchString);
+    }
 }
-
-let myInstance = new myClass();
-myInstance .onChance = function(value){
-   console.log(value);
-}
-*/

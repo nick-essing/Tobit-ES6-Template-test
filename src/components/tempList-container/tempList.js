@@ -43,6 +43,7 @@ export default class tempList1 {
             new loadJson("https://chaynssvc.tobit.com/v0.5/"+item.locationId+"/LocationSettings").then((data) =>{
                 domain = data.data.domain;
                 var div = document.createElement("div");
+                
                 div.innerHTML = ""+ 
                     "<div id = 'data"+ id +"'>" +
                     "<div class='ListItem ListItem--accordion' id= 'open"+ id +"'>" +
@@ -59,7 +60,7 @@ export default class tempList1 {
                             "</div>" +
                             "</div>" +
                             "<div class='ListItem__body'>" +
-                                "<div class='ListItem__Content'>" +
+                                "<div class='ListItem__content'>" +
                                     "<p>" + 
                                         "https://"+ domain +"<br>" +
                                         //"<div id= 'script"+ id +"'><a><script>document.querySelector('#script"+ id +"').addEventListener('click', function(){chayns.openUrlInBrowser('https://"+ domain +"')});</script>"+domain+"</a></div>"+

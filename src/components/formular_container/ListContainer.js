@@ -1,25 +1,10 @@
 import htmlToElement from 'html-to-element';
 
 export default class List {
-    constructor(element) {
+    constructor(element,object) {
         document.querySelector(element).appendChild(this.createList());
-        this.addMoreListener();
+        this.addMoreListener(object);
     }
-
-    /*returnEvents = () => {
-        return new Promise((resolve,reject) => {
-            try{
-                this.addSearchListener().then((data) => {
-                    resolve(true, data);
-                });
-                this.addMoreListener().then((data) => {
-                    resolve(false, data);
-                });
-            }catch(e){
-                reject();
-            }
-        });
-    }*/
 
     createList = () => {
         const list = htmlToElement(`
@@ -43,19 +28,12 @@ export default class List {
             </div>`);
             return list;
     }
-    addMoreListener = () => {
+    addMoreListener = (object) => {
         document.querySelector('#right').addEventListener('click', () => {  
-            return new Promise((resolve, reject) => {
-                try{
-                    if (document.querySelector('#search').value === ""){
-                        resolve('love');
-                    }else{
-                        resolve(document.querySelector('#search').value);
-                    }
-                }catch(e){
-                    reject();
-                }    
-            });
+        if (document.querySelector('#search').value === "")
+            object.onMoreBtnChange('love');
+        else
+            object.onMoreBtnChange(document.querySelector('#search').value);
         });
     }  
 }

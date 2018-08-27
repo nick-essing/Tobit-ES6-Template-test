@@ -1,9 +1,10 @@
 import htmlToElement from 'html-to-element';
+import '../Insert';
 
 export default class Searchbar {
-    constructor(element) {
+    constructor(element, object) {
         document.querySelector(element).appendChild(this.createSearchBar());
-        this.addSearchListener();
+        this.addSearchListener(object);
     }
     createSearchBar = () => {
         const searchbar = htmlToElement(`
@@ -36,25 +37,18 @@ export default class Searchbar {
                     <i class="fa fa-search"></i>
                 </label>
             </div>`);
-            return searchbar;
+        return searchbar;
     }
-    addSearchListener = () => {
-        document.querySelector('#search').addEventListener('input', () => {  
-            let timeout = null;
+    addSearchListener = (object) => {
+        let timeout = 0;
+        document.querySelector('#search').addEventListener('keyup', () => {
             clearTimeout(timeout);
             timeout = setTimeout(() => {
-                /*return new Promise((resolve, reject) => {
-                    try{
-                        if (document.querySelector('#search').value === ""){
-                            resolve('love');
-                        }else{
-                            resolve(document.querySelector('#search').value);
-                        }
-                    }catch(e){
-                        reject();
-                    }
-                }) */              
-            },300); 
+                if (document.querySelector('#search').value === "")
+                    object.onSearchBtnChange('love');
+                else
+                    object.onSearchBtnChange(document.querySelector('#search').value);
+            }, 300);
         });
     }
 }
