@@ -1,7 +1,12 @@
 import htmlToElement from 'html-to-element';
 
 export default class Formular {
-    constructor(){}
+    constructor(element) {
+        this.baseForm = document.querySelector(element);
+        this.baseForm.appendChild(this.createFormular());   
+        this.addListener();
+    }
+    baseForm = null;
     createFormular = () => {
         const form = htmlToElement(`
                 <div class= "content__card" style= "margin-top: 15px">
@@ -33,4 +38,27 @@ export default class Formular {
                 </div>`);
             return form;
         }
+    addListener = () => {
+        document.querySelector('#sendNow').addEventListener('click', () => {                
+            let name = document.querySelector('#myName').value;
+            let url = document.querySelector('#myUrl').value;
+            let facebook = document.querySelector('#myFacebook').value;
+            let adress = document.querySelector('#myAdress').value;
+            let place = document.querySelector('#myLocation').value;
+            if (name !== '' && url !== '') {
+                chayns.intercom.sendMessageToPage({  
+                    text:"Neue Site : "+ name +", "+ url +", "+ facebook +", "+ adress +", "+ place
+                });
+                document.querySelector('#myName').value = '',
+                document.querySelector('#myUrl').value = '',
+                document.querySelector('#myFacebook').value = '',
+                document.querySelector('#myAdress').value = '',
+                document.querySelector('#myLocation').value = '' 
+            } else {
+                chayns.dialog.alert('Fehler', 'Bitte fülle die Plichtfelder aus.');
+            } 
+        });
     }
+}
+
+
