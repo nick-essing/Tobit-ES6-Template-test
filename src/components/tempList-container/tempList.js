@@ -5,13 +5,22 @@ export default class tempList1 {
     constructor() {
 
     }
-    refreshList = (link) => {       //start & suche
+    refreshList = (link) => { 
         new loadJson(link).then((data) => {
             this.deleteAllItems();
             this.clearTemp();
             this.createTempList(data.Data);
             this.createItemList(); 
         }); 
+    }
+    appendList = (searchString) =>{
+        new loadJson("https://chayns1.tobit.com/TappApi/Site/SlitteApp?SearchString=" + searchString + "&Skip="+ tempList.length +"&Take="+ count).then((data) => {
+            this.createTempList(data.Data);
+            this.createItemList(); 
+        }); 
+    }
+    clearTemp = () => {
+        tempList = [];
     }
     createTempList = (data) => {
         let x = tempList.length;
@@ -25,7 +34,7 @@ export default class tempList1 {
         }
     }
     deleteAllItems = () => {
-        document.querySelector("#list").innerHTML ="";   
+        document.querySelector("#list1").innerHTML ="";   
     }
     createItem = (item,id) => {
         var picture,domain;

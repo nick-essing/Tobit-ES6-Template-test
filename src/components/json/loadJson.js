@@ -1,13 +1,13 @@
 export default class loadJson {
     constructor(link) {
-        return new Promise(function(resolve, reject){
+        return new Promise((resolve, reject) => {
             fetch(link)
-                .then(function(response) {
+                .then((response) => {
                     return (response.json());
-                }).then(function(json) {
+                }).then((json) => {
                     console.log('parsed json', json)
                     resolve(json);
-                }).catch(function(ex) {
+                }).catch((ex) => {
                     console.log('parsing failed', ex);
                     reject();
                 });
