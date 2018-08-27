@@ -1,4 +1,3 @@
-
 import htmlToElement from 'html-to-element';
 
 export default class List {

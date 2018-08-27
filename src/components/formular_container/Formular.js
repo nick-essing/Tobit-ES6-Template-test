@@ -7,7 +7,7 @@ export default class Formular {
         this.addListener();
     }
     baseForm = null;
-    createFormular  ()  {
+    createFormular = () => {
         const form = htmlToElement(`
                 <div class= "content__card" style= "margin-top: 15px">
                 <h2>Du willst eine Site für deine Firma hinzufügen ?</h2>
@@ -38,8 +38,8 @@ export default class Formular {
                 </div>`);
             return form;
         }
-    addListener  ()  {
-        document.querySelector('#sendnow').addEventListener('click', () => {                
+    addListener = () => {
+        document.querySelector('#sendNow').addEventListener('click', () => {                
             let name = document.querySelector('#myName').value;
             let url = document.querySelector('#myUrl').value;
             let facebook = document.querySelector('#myFacebook').value;
@@ -47,13 +47,13 @@ export default class Formular {
             let place = document.querySelector('#myLocation').value;
             if (name !== '' && url !== '') {
                 chayns.intercom.sendMessageToPage({  
-                    text:"Neue Site "+ name +", "+ url +", "+ facebook +", "+ adress +", "+ place
+                    text:"Neue Site : "+ name +", "+ url +", "+ facebook +", "+ adress +", "+ place
                 });
-                name.value = '',
-                url.value = '',
-                facebook.value = '',
-                adress.value = '',
-                place.value = '' 
+                document.querySelector('#myName').value = '',
+                document.querySelector('#myUrl').value = '',
+                document.querySelector('#myFacebook').value = '',
+                document.querySelector('#myAdress').value = '',
+                document.querySelector('#myLocation').value = '' 
             } else {
                 chayns.dialog.alert('Fehler', 'Bitte fülle die Plichtfelder aus.');
             } 
