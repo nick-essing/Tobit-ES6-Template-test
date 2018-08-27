@@ -3,6 +3,8 @@ import htmlToElement from 'html-to-element';
 export default class List {
     constructor(element) {
         document.querySelector(element).appendChild(this.createList());
+        this.addSearchListener();
+        this.addMoreListener();
     }
     createList = () => {
         const list = htmlToElement(`
@@ -46,7 +48,7 @@ export default class List {
                 </label>
             </div>
             </div>
-            <div class="accordion__body" id="list">
+            <div class="accordion__body" id="list1">
             </div>
             <div class='right' style='text-align: right;margin: 10px 10px 5px 0;'>
             <a href='#' id='right'>Mehr anzeigen</a>             
@@ -54,4 +56,22 @@ export default class List {
             </div>`);
             return list;
     }
+    addSearchListener = () => {
+        document.querySelector('#search').addEventListener('input', () => {  
+            let timeout = null;
+            clearTimeout(timeout);
+            timeout = setTimeout(function(){
+                if (document.querySelector('#search').value === ""){
+                    //_start();
+                }else{
+                    //_suche(document.querySelector('#search').value);
+                }
+            },300); 
+        });
+    } 
+    addMoreListener = () => {
+        document.querySelector('#right').addEventListener('click', () => {  
+
+        });
+    }  
 }
