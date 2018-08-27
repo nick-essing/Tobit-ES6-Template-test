@@ -2,8 +2,7 @@ import htmlToElement from 'html-to-element';
 
 export default class Formular {
     constructor(element) {
-        this.baseForm = document.querySelector(element);
-        this.baseForm.appendChild(this.createFormular());   
+        document.querySelector(element).appendChild(this.createFormular());   
         this.addListener();
     }
     baseForm = null;

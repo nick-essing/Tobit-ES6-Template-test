@@ -1,5 +1,7 @@
 import loadJson from '../json/loadJson';
 import './ListSyles.scss';
+import htmlToElement from 'html-to-element';
+
 let tempList = [],count = 10;
 export default class tempList1 {
     constructor() {
@@ -42,35 +44,32 @@ export default class tempList1 {
             picture = data.data[0].icon.url;
             new loadJson("https://chaynssvc.tobit.com/v0.5/"+item.locationId+"/LocationSettings").then((data) =>{
                 domain = data.data.domain;
-                var div = document.createElement("div");
-                
-                div.innerHTML = ""+ 
-                    "<div id = 'data"+ id +"'>" +
-                    "<div class='ListItem ListItem--accordion' id= 'open"+ id +"'>" +
-                        "<div class='ListItem__head'>" +
-                            "<div class='ListItem__Arrow'>" +
-                                "<i class='fa fa-chevron-right'></i>" +
-                            "</div>" +
-                            "<div class='ListItem__Image'>" +
-                                "<img style="+"'"+"background-image: url("+picture+")'>" +
-                            "</div>" +
-                            "<div class='ListItem__Title'>" +
-                                "<p class='ListItem__Title--headline'>"+ item.appstoreName +"</p>" +
-                                "<p class='ListItem__Title--description'></p>" +
-                            "</div>" +
-                            "</div>" +
-                            "<div class='ListItem__body'>" +
-                                "<div class='ListItem__content'>" +
-                                    "<p>" + 
-                                        "https://"+ domain +"<br>" +
-                                        //"<div id= 'script"+ id +"'><a><script>document.querySelector('#script"+ id +"').addEventListener('click', function(){chayns.openUrlInBrowser('https://"+ domain +"')});</script>"+domain+"</a></div>"+
-                                        "https://facebook/" + item.facebookId +
-                                    "</p>" +
-                                "</div>" +
-                            "</div>" +
-                        "</div>" +
-                "</div>"
-            document.querySelector("#list1").appendChild(div);
+                document.querySelector("#list1").appendChild(htmlToElement(`
+                    <div id = 'data${id}'>
+                    <div class='ListItem ListItem--accordion' id= 'open${id}'>
+                        <div class='ListItem__head'>
+                            <div class='ListItem__Arrow'>
+                                <i class='fa fa-chevron-right'></i>
+                            </div>
+                            <div class='ListItem__Image'>
+                                <img style= 'background-image: url(${picture})'>
+                            </div>
+                            <div class='ListItem__Title'>
+                                <p class='ListItem__Title--headline'>${item.appstoreName}</p>
+                                <p class='ListItem__Title--description'></p>
+                            </div>
+                            </div>
+                            <div class='ListItem__body'>
+                                <div class='ListItem__content'>
+                                    <p> 
+                                        https://${domain} <br> 
+                                        https://facebook/${item.facebookId} 
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                `)); 
             let close = true, text;
                 document.querySelector("#data"+id).addEventListener("click", () => {
                         if (close){
