@@ -1,15 +1,12 @@
-import Formular from './components/formular_container/Formular';
-import tempList1 from './components/tempList-container/tempList';
-import ListContainer from './components/formular_container/ListContainer';
-import Searchbar from './components/formular_container/Searchbar';
+import Formular from './components/formular';
+import temp_List from './components/listContainer/tempList-container/tempList';
+import ListContainer from './components/listContainer/ListContainer';
+import Searchbar from './components/listContainer/Searchbar';
 
 const init = async () => {
     await chayns.ready;
-    this.tempList = new tempList1();
-    new ListContainer('#list',this);
-    new Searchbar('#searchbar',this);
+    new ListContainer('#list');
     new Formular('#formular'); 
-    this.tempList.refreshList("https://chayns1.tobit.com/TappApi/Site/SlitteApp?SearchString="+ "love" +"&Skip="+ "0" +"&Take="+ "10");
 };
 
 init();

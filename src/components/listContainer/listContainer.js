@@ -1,9 +1,15 @@
 import htmlToElement from 'html-to-element';
+import Searchbar from './searchbar';
+import moreBtn from './moreBtn';
+import temp_List from './tempList-container/tempList';
+
 
 export default class List {
-    constructor(element,object) {
+    constructor(element) {
         document.querySelector(element).appendChild(this.createList());
-        this.addMoreListener(object);
+        const tmp = new temp_List('love');
+        new Searchbar('#searchBar',tmp);
+        new moreBtn('#moreBtn',tmp);
     }
 
     createList = () => {
@@ -18,22 +24,12 @@ export default class List {
                     MyFavoriteSites
                 </div>
             </div>
-            <div id="searchbar"></div>
+            <div id="searchBar"></div>
             </div>
             <div class="accordion__body" id="list1">
             </div>
-            <div class='right' style='text-align: right;margin: 10px 10px 5px 0;'>
-            <a href='#' id='right'>Mehr anzeigen</a>             
-            </div>
+            <div id="moreBtn">
             </div>`);
             return list;
     }
-    addMoreListener = (object) => {
-        document.querySelector('#right').addEventListener('click', () => {  
-        if (document.querySelector('#search').value === "")
-            object.onMoreBtnChange('love');
-        else
-            object.onMoreBtnChange(document.querySelector('#search').value);
-        });
-    }  
 }

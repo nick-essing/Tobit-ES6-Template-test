@@ -1,10 +1,10 @@
 import htmlToElement from 'html-to-element';
-import '../../Insert';
 
 export default class Searchbar {
-    constructor(element, object) {
-        document.querySelector(element).appendChild(this.createSearchBar());
-        this.addSearchListener(object);
+    constructor(id,tmp) {
+        document.querySelector(id).appendChild(this.createSearchBar());
+        this.addSearchListener(tmp);
+        this.currElement;
     }
     createSearchBar = () => {
         const searchbar = htmlToElement(`
@@ -37,18 +37,18 @@ export default class Searchbar {
                     <i class="fa fa-search"></i>
                 </label>
             </div>`);
-        return searchbar;
+        return this.currElement = searchbar;
     }
-    addSearchListener = (object) => {
+    addSearchListener = (tmp) => {
         let timeout = 0;
-        document.querySelector('#search').addEventListener('keyup', () => {
+        this.currElement.querySelector('#search').addEventListener('keyup', () => {
             clearTimeout(timeout);
             timeout = setTimeout(() => {
                 if (document.querySelector('#search').value === "")
-                    object.onSearchBtnChange('love');
+                    tmp.refreshList("https://chayns1.tobit.com/TappApi/Site/SlitteApp?SearchString="+ 'love' +"&Skip="+ "0" +"&Take="+ "10");
                 else
-                    object.onSearchBtnChange(document.querySelector('#search').value);
+                    tmp.refreshList("https://chayns1.tobit.com/TappApi/Site/SlitteApp?SearchString="+ this.currElement('#search').value +"&Skip="+ "0" +"&Take="+ "10");
             }, 300);
         });
-    }
+    } 
 }
