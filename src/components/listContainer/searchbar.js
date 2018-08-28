@@ -1,5 +1,5 @@
 import htmlToElement from 'html-to-element';
-import '../Insert';
+import '../../Insert';
 
 export default class Searchbar {
     constructor(element, object) {

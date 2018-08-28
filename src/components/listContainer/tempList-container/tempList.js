@@ -1,4 +1,4 @@
-import loadJson from '../json/loadJson';
+import loadJson from '../json/fetchData';
 import './ListSyles.scss';
 import htmlToElement from 'html-to-element';
 
