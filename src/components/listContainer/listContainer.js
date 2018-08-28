@@ -1,5 +1,5 @@
 import htmlToElement from 'html-to-element';
-import Searchbar from './searchbar';
+import Searchbar from './searchBar';
 import moreBtn from './moreBtn';
 import temp_List from './tempList-container/tempList';
 
@@ -8,8 +8,17 @@ export default class List {
     constructor(element) {
         document.querySelector(element).appendChild(this.createList());
         const tmp = new temp_List('love');
-        new Searchbar('#searchBar',tmp);
-        new moreBtn('#moreBtn',tmp);
+        this.searchBar = new Searchbar('#searchBar',tmp);
+        this.moreBtn = new moreBtn('#moreBtn',tmp);
+
+        
+        this.searchBar.addSearchListener((data) => {
+            tmp.refreshList(data);
+        });
+        this.moreBtn.addMoreListener((data) => {
+            tmp.appendList(data);
+        });
+    
     }
 
     createList = () => {

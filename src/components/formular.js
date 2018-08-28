@@ -3,6 +3,7 @@ import htmlToElement from 'html-to-element';
 export default class Formular {
     constructor(element) {
         document.querySelector(element).appendChild(this.createFormular());   
+        this.currElement
         this.addListener();
     }
     baseForm = null;
@@ -35,24 +36,24 @@ export default class Formular {
                     <button class="button" id= "sendNow">Site hinzufügen</button>
                 </div>
                 </div>`);
-            return form;
+            return this.currElement = form;
         }
     addListener = () => {
         document.querySelector('#sendNow').addEventListener('click', () => {                
-            let name = document.querySelector('#myName').value;
-            let url = document.querySelector('#myUrl').value;
-            let facebook = document.querySelector('#myFacebook').value;
-            let adress = document.querySelector('#myAdress').value;
-            let place = document.querySelector('#myLocation').value;
+            let name = this.currElement.querySelector('#myName').value;
+            let url = this.currElement.querySelector('#myUrl').value;
+            let facebook = this.currElement.querySelector('#myFacebook').value;
+            let adress = this.currElement.querySelector('#myAdress').value;
+            let place = this.currElement.querySelector('#myLocation').value;
             if (name !== '' && url !== '') {
                 chayns.intercom.sendMessageToPage({  
                     text:"Neue Site : "+ name +", "+ url +", "+ facebook +", "+ adress +", "+ place
                 });
-                document.querySelector('#myName').value = '',
-                document.querySelector('#myUrl').value = '',
-                document.querySelector('#myFacebook').value = '',
-                document.querySelector('#myAdress').value = '',
-                document.querySelector('#myLocation').value = '' 
+                this.currElement.querySelector('#myName').value = '',
+                this.currElement.querySelector('#myUrl').value = '',
+                this.currElement.querySelector('#myFacebook').value = '',
+                this.currElement.querySelector('#myAdress').value = '',
+                this.currElement.querySelector('#myLocation').value = '' 
             } else {
                 chayns.dialog.alert('Fehler', 'Bitte fülle die Plichtfelder aus.');
             } 
