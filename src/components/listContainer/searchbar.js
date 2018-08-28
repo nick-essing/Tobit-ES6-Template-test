@@ -3,7 +3,6 @@ import htmlToElement from 'html-to-element';
 export default class Searchbar {
     constructor(id,tmp) {
         document.querySelector(id).appendChild(this.createSearchBar());
-        this.addSearchListener(tmp);
         this.currElement;
     }
     createSearchBar = () => {
@@ -39,15 +38,15 @@ export default class Searchbar {
             </div>`);
         return this.currElement = searchbar;
     }
-    addSearchListener = (tmp) => {
+    addSearchListener = (callback) => {
         let timeout = 0;
         this.currElement.querySelector('#search').addEventListener('keyup', () => {
             clearTimeout(timeout);
             timeout = setTimeout(() => {
                 if (document.querySelector('#search').value === "")
-                    tmp.refreshList("https://chayns1.tobit.com/TappApi/Site/SlitteApp?SearchString="+ 'love' +"&Skip="+ "0" +"&Take="+ "10");
+                    callback("https://chayns1.tobit.com/TappApi/Site/SlitteApp?SearchString="+ 'love' +"&Skip="+ "0" +"&Take="+ "10");
                 else
-                    tmp.refreshList("https://chayns1.tobit.com/TappApi/Site/SlitteApp?SearchString="+ this.currElement('#search').value +"&Skip="+ "0" +"&Take="+ "10");
+                    callback("https://chayns1.tobit.com/TappApi/Site/SlitteApp?SearchString="+ this.currElement.querySelector('#search').value +"&Skip="+ "0" +"&Take="+ "10");
             }, 300);
         });
     } 

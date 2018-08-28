@@ -1,9 +1,8 @@
 import htmlToElement from 'html-to-element';
 
 export default class List {
-    constructor(id,tmp) {
+    constructor(id) {
         document.querySelector(id).appendChild(this.createBtn());
-        this.addMoreListener(tmp);
         this.currElement;
     }
 
@@ -15,13 +14,12 @@ export default class List {
             </div>`);
             return this.currElement = btn;
     }
-    addMoreListener = (tmp) => {
+    addMoreListener = (callback) => {
         this.currElement.querySelector('#right').addEventListener('click', () => {  
-            console.log(this.parentNode);
             if (document.querySelector('#search').value === ""){
-                tmp.appendList('love');
+                callback('love');
             }else{
-                tmp.appendList(document.querySelector('#search').value);
+                callback(document.querySelector('#search').value);
             }
         });
     }  

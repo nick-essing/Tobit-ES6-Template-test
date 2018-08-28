@@ -16,6 +16,7 @@ export default class temp_List {
             }); 
     }
     appendList = (searchString) => {
+        console.log(searchString);
         fetchData("https://chayns1.tobit.com/TappApi/Site/SlitteApp?SearchString=" + searchString + "&Skip="+ tempList.length +"&Take="+ count).then((data) => {
             this.createTempList(data.Data);
             this.createItemList(); 
