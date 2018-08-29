@@ -3,7 +3,6 @@ import Searchbar from './searchBar';
 import moreBtn from './moreBtn';
 import temp_List from './tempList-container/tempList';
 
-
 export default class List {
     constructor(element) {
         document.querySelector(element).appendChild(this.createList());
